@@ -185,6 +185,8 @@ class _PagedLayoutBuilderState<PageKeyType, ItemType>
 
   @override
   Widget build(BuildContext context) {
+    // Create local variable to prevent state refreshing null exceptions
+    final itemList = _state.items;
     return _PagedLayoutAnimator(
       animateTransitions: _builderDelegate.animateTransitions,
       transitionDuration: _builderDelegate.transitionDuration,
@@ -217,7 +219,7 @@ class _PagedLayoutBuilderState<PageKeyType, ItemType>
             (context, index) => _buildListItemWidget(
               context,
               index,
-              _state.items!,
+              itemList!,
             ),
             _itemCount,
             _newPageProgressIndicatorBuilder,
@@ -227,7 +229,7 @@ class _PagedLayoutBuilderState<PageKeyType, ItemType>
             (context, index) => _buildListItemWidget(
               context,
               index,
-              _state.items!,
+              itemList!,
             ),
             _itemCount,
             (context) => _newPageErrorIndicatorBuilder(context),
@@ -237,7 +239,7 @@ class _PagedLayoutBuilderState<PageKeyType, ItemType>
             (context, index) => _buildListItemWidget(
               context,
               index,
-              _state.items!,
+              itemList!,
             ),
             _itemCount,
             _noMoreItemsIndicatorBuilder,
